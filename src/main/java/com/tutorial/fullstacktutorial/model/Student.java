@@ -49,6 +49,14 @@ public class Student implements Serializable {
         return this.firstName + " " + this.lastName;
     }
 
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public String getLastName() {
+        return this.lastName;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -93,7 +101,8 @@ public class Student implements Serializable {
     @Override
     public String toString() {
         return "Student{" + "id=" + id
-                        + ", name=" + firstName + " " + lastName
+                        + ", firstName=" + firstName
+                        + ", lastName=" + lastName
                         + ", year=" + year
                         + ", email=" + email
                         + ", phone=" + phone
