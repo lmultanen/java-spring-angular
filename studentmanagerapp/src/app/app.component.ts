@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { response } from 'express';
 import { Student } from './student';
 import { StudentService } from './student.service';
 
@@ -64,8 +65,18 @@ export class AppComponent implements OnInit {
     )
   }
 
-  public onDeleteStudent(id?: number): void {
-
+  public onDeleteStudent(id: number): void {
+    this.studentService.deleteStudent(id).subscribe(
+      {
+        next: (response: void) => {
+          console.log("Student successfully deleted.");
+          this.getStudents();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }
+    )
   }
 
   public onOpenModal(student: Student | undefined, mode: string): void {
