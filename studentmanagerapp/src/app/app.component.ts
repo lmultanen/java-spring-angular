@@ -10,6 +10,9 @@ import { StudentService } from './student.service';
 })
 export class AppComponent implements OnInit {
   public students: Student[];
+  public updateStudent: Student;
+  public deleteStudent: Student;
+  public editStudent: Student;
 
   constructor(private studentService: StudentService) {}
 
@@ -26,5 +29,36 @@ export class AppComponent implements OnInit {
         alert(error.message);
       }
     )
+  }
+
+  public onAddStudent(student: Student): void {
+
+  }
+
+  public onUpdateStudent(student: Student): void {
+
+  }
+
+  public onDeleteStudent(id?: number): void {
+
+  }
+
+  public onOpenModal(student: Student, mode: string): void {
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.style.display = 'none';
+    button.type = 'button';
+    button.setAttribute('data-toggle', 'modal');
+    if (mode === 'add') {
+      button.setAttribute('data-target', '#addStudentModal');
+    }
+    if (mode === 'edit') {
+      button.setAttribute('data-target', '#updateStudentModal');
+    }
+    if (mode === 'delete') {
+      button.setAttribute('data-target', '#deleteStudentModal');
+    }
+    container?.appendChild(button);
+    button.click();
   }
 }
