@@ -35,8 +35,19 @@ export class AppComponent implements OnInit {
   }
 
   public onAddStudent(addForm: NgForm): void {
-
-    // remember to reset form after adding
+    this.studentService.addStudent(addForm.value).subscribe(
+      {
+        next: (response: Student) => {
+          console.log(response);
+          this.getStudents();
+          addForm.reset();
+          document.getElementById("add-student-form")?.click();
+        },
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }
+    )
   }
 
   public onUpdateStudent(student: Student): void {
@@ -57,7 +68,7 @@ export class AppComponent implements OnInit {
 
   }
 
-  public onOpenModal(student: Student, mode: string): void {
+  public onOpenModal(student: Student | undefined, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
     button.style.display = 'none';

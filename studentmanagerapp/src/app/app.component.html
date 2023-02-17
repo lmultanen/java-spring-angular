@@ -1,5 +1,8 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- will later add nav bar with button to add new students -->
+<nav>
+  <button type="button" (click)="onOpenModal(undefined,'add')">Add Student</button>
+</nav>
 <div class="container" id="main-container">
     <div class="row">
         <div *ngFor="let student of students" class="col-md-6 col-xl-3">
@@ -66,7 +69,7 @@
           </div>
           <div class="modal-footer">
              <button type="button" id="add-student-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
-             <button type="submit" class="btn btn-primary" >Save changes</button>
+             <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
           </div>
           </form>
        </div>
