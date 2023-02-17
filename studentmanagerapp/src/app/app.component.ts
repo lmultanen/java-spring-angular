@@ -11,9 +11,9 @@ import { StudentService } from './student.service';
 })
 export class AppComponent implements OnInit {
   public students: Student[];
-  public updateStudent: Student;
-  public deleteStudent: Student;
-  public editStudent: Student;
+  public updateStudent: Student | undefined;
+  public deleteStudent: Student | undefined;
+  public editStudent: Student | undefined;
 
   constructor(private studentService: StudentService) {}
 
@@ -23,21 +23,34 @@ export class AppComponent implements OnInit {
 
   public getStudents(): void {
     this.studentService.getStudents().subscribe(
-      (response: Student[]) => {
-        this.students = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
+      {
+        next: ((response: Student[]) => {
+            this.students = response;
+          }),
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
       }
     )
   }
 
   public onAddStudent(addForm: NgForm): void {
 
+    // remember to reset form after adding
   }
 
   public onUpdateStudent(student: Student): void {
-    
+    this.studentService.updateStudent(student).subscribe(
+      {
+        next: ((response: Student) => {
+            console.log(response);
+            this.getStudents();
+          }),
+        error: (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }
+    )
   }
 
   public onDeleteStudent(id?: number): void {
