@@ -37,9 +37,9 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
           </button>
-       </div>
+       </div> 
        <div class="modal-body">
-          <form>
+          <form #addForm="ngForm" (ngSubmit)="onAddStudent(addForm)">
           <div class="form-group">
              <label for="firstName">First Name</label>
              <input type="text" ngModel name="firstName" class="form-control" id="firstName" placeholder="First Name" required>
@@ -78,42 +78,42 @@
 <div class="modal fade" id="updateStudentModal" tabindex="-1" role="dialog" aria-labelledby="studentEditModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
      <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header"> 
            <h5 class="modal-title" id="updateStudentModalLabel">Edit Student</h5>
            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
            <span aria-hidden="true">&times;</span>
            </button>
         </div>
         <div class="modal-body">
-           <form>
+           <form #editForm="ngForm">
               <div class="form-group">
                  <label for="firstName">First Name</label>
-                 <input type="text"  name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
+                 <input type="text" ngModel="{{editStudent?.firstName}}" name="firstName" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First Name">
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name</label>
-                <input type="text"  name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
+                <input type="text" ngModel="{{editStudent?.lastName}}" name="lastName" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Last Name">
              </div>
-              <input type="hidden"  name="id" class="form-control" id="id" placeholder="Email">
+              <input type="hidden" ngModel="{{editStudent?.id}}" name="id" class="form-control" id="id" placeholder="Email">
               <div class="form-group">
                  <label for="email">Email Address</label>
-                 <input type="email"  name="email" class="form-control" id="email" placeholder="Email">
+                 <input type="email" ngModel="{{editStudent?.email}}" name="email" class="form-control" id="email" placeholder="Email">
               </div>
               <div class="form-group">
                  <label for="year">Year</label>
-                 <input type="text"  name="year" class="form-control" id="year" placeholder="Year">
+                 <input type="text" ngModel="{{editStudent?.year}}" name="year" class="form-control" id="year" placeholder="Year">
               </div>
               <div class="form-group">
                  <label for="phone">Phone</label>
-                 <input type="text"  name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
+                 <input type="text" ngModel="{{editStudent?.phone}}" name="phone" class="form-control" id="phone" name="phone" placeholder="Phone">
               </div>
               <div class="form-group">
                  <label for="imgUrl">Image URL</label>
-                 <input type="text"  name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
+                 <input type="text" ngModel="{{editStudent?.imgUrl}}" name="imageUrl" class="form-control" id="imageUrl" placeholder="Image URL">
               </div>
               <div class="modal-footer">
                  <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                 <button data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                 <button data-dismiss="modal" class="btn btn-primary" (click)="onUpdateStudent(editForm.value)">Save changes</button>
               </div>
            </form>
         </div>

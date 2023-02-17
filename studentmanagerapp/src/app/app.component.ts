@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Student } from './student';
 import { StudentService } from './student.service';
 
@@ -31,12 +32,12 @@ export class AppComponent implements OnInit {
     )
   }
 
-  public onAddStudent(student: Student): void {
+  public onAddStudent(addForm: NgForm): void {
 
   }
 
   public onUpdateStudent(student: Student): void {
-
+    
   }
 
   public onDeleteStudent(id?: number): void {
@@ -53,9 +54,11 @@ export class AppComponent implements OnInit {
       button.setAttribute('data-target', '#addStudentModal');
     }
     if (mode === 'edit') {
+      this.editStudent = student;
       button.setAttribute('data-target', '#updateStudentModal');
     }
     if (mode === 'delete') {
+      this.deleteStudent = student;
       button.setAttribute('data-target', '#deleteStudentModal');
     }
     container?.appendChild(button);
