@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
+import { Injectable, isDevMode } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Student } from "./student";
 import { Observable } from "rxjs";
-import { environment } from "src/environments/environment.development";
+import { environment } from "src/environments/environment";
 
 @Injectable({
     providedIn: 'root'
@@ -10,7 +10,9 @@ import { environment } from "src/environments/environment.development";
 export class StudentService {
     private apiServerUrl = environment.apiServerUrl;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) {
+        console.log(`Production mode: ${environment.production}`)
+    }
 
     public getStudents(): Observable<Student[]> {
         return this.http.get<Student[]>(`${this.apiServerUrl}/student/all`);
